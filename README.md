@@ -49,7 +49,7 @@ python pixelmirror.py --mode client --host 127.0.0.1 --port 8765
 ```
 
 ## Screenshot
-![Screenshot]([URL_or_relative_path](https://github.com/jonesdeveloperchung-pixel/PixelMirror/blob/main/screenshot_20151015.png))
+![Screenshot](https://github.com/jonesdeveloperchung-pixel/PixelMirror/blob/main/screenshot_20151015.png)
 
 
 ## How It Works
