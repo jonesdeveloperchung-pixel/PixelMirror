@@ -48,6 +48,10 @@ For local testing, you can use:
 python pixelmirror.py --mode client --host 127.0.0.1 --port 8765
 ```
 
+## Screenshot
+![Screenshot](https://github.com/jonesdeveloperchung-pixel/PixelMirror/blob/main/screenshot_20151015.png)
+
+
 ## How It Works
 
 1. **Server**: Captures the desktop screen using `pyautogui`, compresses it to JPEG format, encodes it as Base64, and streams it over WebSocket
