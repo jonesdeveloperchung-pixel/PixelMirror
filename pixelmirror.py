@@ -1,16 +1,45 @@
 #!/usr/bin/env python3
 """
-PixelMirror – A minimal, production-ready screen mirroring demo.
+PixelMirror – A minimal, production‑ready screen mirroring demo.
 
-This script implements both the server and the client in a single file.
-It follows the design described in the system specification:
-  • Screen capture & streaming (server)
-  • Input forwarding (client → server)
-  • Settings persistence
-  • Robust networking with exponential back-off
-  • Comprehensive logging & error handling
+Design concept
+--------------
+The entire demo is packaged into a single executable Python file
+to keep distribution simple while still demonstrating the key
+components of a screen‑mirroring system:
 
-Author: OpenAI ChatGPT
+* **Server** – captures the host screen, streams it to any number of
+  clients, and forwards input events (mouse/keyboard) back to the
+  host.  The server is implemented as a WebSocket server that
+  continuously broadcasts JPEG‑compressed screenshots and applies
+  remote input commands via pyautogui.
+
+* **Client** – connects to the server, receives screen updates,
+  displays them in a Tkinter window, and forwards local input
+  events back to the server.  The client uses a background asyncio
+  event loop that runs in a separate thread so the UI stays
+  responsive.
+
+* **Settings** – a lightweight INI file in the user’s home folder
+  stores user‑configurable options (not heavily used in this demo,
+  but the API is ready for extensions).
+
+* **Networking abstraction** – the INetworkManager interface
+  separates networking concerns from the rest of the code.  This
+  allows the server and client to implement their own details
+  while sharing a common contract.
+
+* **Input abstraction** – IInputHandler defines a contract for
+  input handling so the UI can be decoupled from the networking
+  layer.  The server does not need to capture local input,
+  therefore its implementation is a no‑op.
+
+* **Robustness** – the client implements exponential back‑off on
+  reconnect attempts.  Logging is enabled everywhere to aid
+  debugging and traceability.  All network and UI operations
+  are wrapped in try/except blocks to prevent crashes.
+
+Author: Jones Chung
 License: MIT
 """
 
