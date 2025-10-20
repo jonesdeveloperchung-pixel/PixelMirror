@@ -9,7 +9,7 @@ The PixelMirror application has been successfully implemented and is ready for u
 ## 📁 Project Structure
 
 ```
-d:\Workspace\PixelMirror\python/
+PixelMirror
 ├── pixelmirror.py              # Main application (server & client)
 ├── requirements.txt            # Python dependencies
 ├── README.md                   # Comprehensive documentation
