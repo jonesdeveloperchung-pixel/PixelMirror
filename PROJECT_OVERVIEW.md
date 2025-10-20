@@ -1,3 +1,5 @@
+Author: Jones Chung
+
 # PixelMirror - Project Overview
 
 ## 🎯 Project Status: COMPLETE ✅
@@ -32,11 +34,11 @@ pip install -r requirements.txt
 # Test setup
 python test_setup.py
 
-# Start server (on PC to be mirrored)
-python pixelmirror.py --mode server --host 0.0.0.0 --port 8765
+# Start server (on PC to be mirrored) with custom settings
+python pixelmirror.py --mode server --host 0.0.0.0 --port 8765 --monitor-id 1 --tile-size 128 --fallback-threshold 0.8 --capture-interval 0.05 --webp-quality 75 --jpeg-quality 60
 
-# Start client (on viewing device)
-python pixelmirror.py --mode client --host <SERVER_IP> --port 8765
+# Start client (on viewing device) with custom settings
+python pixelmirror.py --mode client --host <SERVER_IP> --port 8765 --reconnect-delay 2.0 --default-width 1280 --default-height 720
 ```
 
 ## ✅ Requirements Compliance
@@ -45,9 +47,12 @@ python pixelmirror.py --mode client --host <SERVER_IP> --port 8765
 |-------------|--------|----------------|
 | **FR-001** Real-time mirroring | ✅ | WebSocket streaming with JPEG compression |
 | **FR-002** Mode toggle | ✅ | Server/client architecture |
-| **FR-003** Resolution selection | ✅ | Automatic scaling and thumbnail generation |
+| **FR-003** Resolution selection | ✅ | Configurable default resolution for client buffer |
 | **FR-004** Connection status | ✅ | Real-time status indicator in UI |
 | **FR-005** Settings panel | ✅ | Settings persistence via INI file |
+| **FR-006** Configurable Parameters | ✅ | Command-line arguments for server and client settings |
+| **FR-007** Multi-monitor Support | ✅ | Server can capture specific monitors |
+| **FR-008** Client-side Full Redraw | ✅ | 'R' key triggers full screen refresh from server |
 | **FR-010** Touchscreen controls | ✅ | Mouse/keyboard input forwarding |
 | **FR-011** Error handling | ✅ | Comprehensive exception handling |
 | **NFR-001** Low latency | ✅ | Optimized capture loop (100ms interval) |
@@ -80,9 +85,11 @@ python pixelmirror.py --mode client --host <SERVER_IP> --port 8765
 - Multi-client support
 
 ### Screen Capture
-- PyAutoGUI-based screen capture
-- JPEG compression (quality: 70%)
+- Multi-monitor support using `mss` (with `pyautogui` fallback for full redraws)
+- Configurable tile-based delta updates
+- Configurable fallback to full JPEG frames
 - Configurable capture interval
+- Configurable WebP and JPEG compression qualities
 - Automatic resolution scaling
 
 ### Input Handling
@@ -121,8 +128,8 @@ Current implementation includes:
 
 ## 🎯 Performance Characteristics
 
-- **Latency**: ~100ms capture interval (configurable)
-- **Compression**: JPEG quality 70% for optimal size/quality balance
+- **Latency**: Configurable capture interval
+- **Compression**: Configurable WebP and JPEG qualities for optimal size/quality balance
 - **Memory**: Efficient image handling with BytesIO
 - **CPU**: Minimal overhead with async I/O operations
 
@@ -130,7 +137,6 @@ Current implementation includes:
 
 The current implementation provides a solid foundation for:
 - Audio streaming integration
-- Multiple monitor support
 - Advanced compression algorithms
 - Mobile client applications (Android/iOS)
 - Web-based clients

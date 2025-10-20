@@ -1,0 +1,20 @@
+# Byte-code files
+*.pyc
+__pycache__/
+
+# Virtual environment
+.venv/
+venv/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Temporary debug files
+debug_full_frame_*.png
+
+# User-specific configuration
+.pixelmirror.ini
