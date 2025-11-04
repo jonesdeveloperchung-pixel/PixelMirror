@@ -1,5 +1,3 @@
-websockets>=11.0.3
-pillow>=10.0.0
-pyautogui>=0.9.54
-numpy>=1.24.0
-python-mss>=9.0.1
+mss
+Pillow
+websockets
